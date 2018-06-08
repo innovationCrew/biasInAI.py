@@ -14,3 +14,13 @@ This project shows an interactive way of exploring these relationships
 
 [parsing resumes]: https://lenabayeva.files.wordpress.com/2015/03/snn-textkernelposter-2015.pdf
 [question retrieval]: https://arxiv.org/abs/1512.05726
+
+
+## Build instructions
+
+### Build the dockerfile
+
+```bash
+cd docker
+docker build -t minicondabias .
+```
