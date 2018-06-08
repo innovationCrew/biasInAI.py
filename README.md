@@ -18,9 +18,15 @@ This project shows an interactive way of exploring these relationships
 
 ## Build instructions
 
-### Build the dockerfile
+1.  Build the dockerfile
 
 ```bash
 cd docker
-docker build -t minicondabias .
+docker build -t minicondaapp .
 ```
+
+2. running the container
+docker run --rm -ti -v $PWD:/project minicondaapp
+
+3. Running the web server
+FLASK_APP=webAPi flask run
