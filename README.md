@@ -16,17 +16,21 @@ This project shows an interactive way of exploring these relationships
 [question retrieval]: https://arxiv.org/abs/1512.05726
 
 
-## Build instructions
+## Instructions
 
-1.  Build the dockerfile
-
+### Build doker container (one time)
 ```bash
 cd docker
 docker build -t minicondaapp .
 ```
 
-2. running the container
-docker run --rm -ti -v $PWD:/project minicondaapp
+### Running the application
 
-3. Running the web server
-FLASK_APP=webAPi flask run
+```bash
+# running the docker container
+docker run --rm -ti -v $PWD:/project -p 5000:5000 minicondaapp
+
+# 
+export FLASK_DEBUG=1
+FLASK_APP=webAPI flask run --host=0.0.0.0
+```
