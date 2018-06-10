@@ -170,22 +170,25 @@ def complete_analogy(word_a, word_b, word_c, word_to_vec_map):
     return best_word
 
 class gloveVec:
+
+    #Load the word vectors - Default to 300-dimention GloVe
     def __init__(self, glove_vec='glove.6B.300d.txt'):
-        _, self.word_to_vec_map = read_glove_vecs('glove.6B.300d.txt')
+        print('loading ' + glove_vec + '...')
+        _, self.word_to_vec_map = read_glove_vecs(glove_vec)
+        print('Done Loading')
+
+    #define Analogy
     def __call__(self, w0, w1, w2):
         return(complete_analogy(w0,w1,w2,self.word_to_vec_map))
 
 
 if __name__ == '__main__':
-    """##  Do the real stuff here"""
 
-    #Next, lets load the word vectors. For this assignment, we will use 50-dimensional GloVe vectors to represent words. Run the following cell to load the word_to_vec_map.
-    _, word_to_vec_map = read_glove_vecs('glove.6B.300d.txt')
+    triads_to_try = [('italy', 'italian', 'spain'), ('india', 'delhi', 'japan'), ('man', 'woman', 'boy')]
+    
+    analogy = gloveVec('glove.6B.50d.txt')
 
-    #triads_to_try = [('italy', 'italian', 'spain'), ('india', 'delhi', 'japan'), ('man', 'woman', 'boy'), ('small', 'smaller', 'large')]
-    triads_to_try = [('women', 'pregnant', 'man'), ('india', 'delhi', 'china'), ('man', 'woman', 'boy'), ('small', 'smaller', 'large')]
 
     for triad in triads_to_try:
-        analogy = complete_analogy(*triad,word_to_vec_map)
-        print ('{} -> {} :: {} -> {}'.format( *triad,analogy ))
+        print ('{} -> {} :: {} -> {}'.format( *triad,analogy(*triad) ))
     

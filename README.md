@@ -32,5 +32,6 @@ docker run --rm -ti -v $PWD:/project -p 5000:5000 minicondaapp
 
 # 
 export FLASK_DEBUG=1
+# FOR MAC ONLY --> export LANG=en_US.UTF-8 & export LC_ALL=en_US.UTF-8
 FLASK_APP=webAPI flask run --host=0.0.0.0
 ```
