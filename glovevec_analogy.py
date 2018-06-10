@@ -65,7 +65,7 @@ def read_glove_vecs(glove_file = 'glove.6B.50d.txt'):
     if not os.path.exists(glove_file):
         print('Downloading')
         download_file_from_google_drive(google_drive_glove_id[glove_file], glove_file)
-    with open(glove_file, 'r') as f:
+    with open(glove_file, 'r+', encoding="utf-8") as f:
         words = set()
         word_to_vec_map = {}
         
@@ -168,6 +168,13 @@ def complete_analogy(word_a, word_b, word_c, word_to_vec_map):
 
         
     return best_word
+
+class gloveVec:
+    def __init__(self, glove_vec='glove.6B.300d.txt'):
+        _, self.word_to_vec_map = read_glove_vecs('glove.6B.300d.txt')
+    def __call__(self, w0, w1, w2):
+        return(complete_analogy(w0,w1,w2,self.word_to_vec_map))
+
 
 if __name__ == '__main__':
     """##  Do the real stuff here"""
