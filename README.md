@@ -1,4 +1,4 @@
-# biasInAP.py
+# biasInAI.py
 # Exploration of AI bias in Word Embedings
 
 ## Introduction
