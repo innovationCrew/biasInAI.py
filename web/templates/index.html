@@ -53,11 +53,11 @@
       -->
 
         <div class="input-group">
-            <input style="width:22% " class="form-control " placeholder="man" name="word" autofocus type="text" />
-            <input style="width:22% " class="form-control " placeholder="woman" name="word" type="text" />
-            <input style="width:22% " class="form-control " placeholder="king" name="word" required autofocus type="text" />
+            <input style="width:22% " class="form-control " placeholder="delhi" name="word" autofocus type="text" />
+            <input style="width:22% " class="form-control " placeholder="india" name="word" type="text" />
+            <input style="width:22% " class="form-control " placeholder="tokyo" name="word" required autofocus type="text" />
             <div style="width:34%" class="input-group-append">
-                <span  style="width:65%" id=pairResult class="input-group-text">queen</span>
+                <span  style="width:65%" id=pairResult class="input-group-text"> ? </span>
                 <button style="width:35%" class="btn btn-primary" type="button" id=foo onclick="get_wordpair()">Go</button>
 
              </div>
@@ -109,8 +109,10 @@
       }, 5000);
       */
 
-      console.log('Calling fetch..');
-      fetch('foo')
+      fetch_url = "/result?w0=" + inpWord1 + "&w1=" + inpWord2 + "&w2=" + inpWord3
+
+      console.log('Calling fetch..' + fetch_url);
+      fetch(fetch_url)
         .then(function(response) {
                 console.log('In fetch..');
            if (!response.ok) {
