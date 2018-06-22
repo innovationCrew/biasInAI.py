@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, Response, send_from_directory
+import os
 import sys
 sys.path.append('../')
 from gloveUtils.gloveAnal import gloveVec
@@ -24,6 +25,9 @@ def return_foo():
     return Response('fooResult', mimetype='text/plain')
 
 
+@app.route('/favicon.ico') 
+def favicon(): 
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/result')
 def result():
