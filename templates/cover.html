@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/static/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="manifest" href="/static/site.webmanifest">
+  <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+    <title>Explore Word Embeddings</title>
+    <!-- https://getbootstrap.com/docs/4.1/examples/cover/-- >
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="/static/css/cover.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Explore Word Embeddings</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="#">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+
+
+
+      <main role="main" class="inner cover">
+      
+      <!--
+      <h1 class="cover-heading">Please enter Word Pairs </h1>
+      -->
+
+
+      <form class="form-signin">
+      <!--
+        <h1 class="h3 mb-3 font-weight-normal">Please Enter Word Pairs</h1>
+      -->
+
+        <div class="input-group">
+            <input style="width:22% " class="form-control " placeholder="man" name="word" autofocus type="text" />
+            <input style="width:22% " class="form-control " placeholder="woman" name="word" type="text" />
+            <input style="width:22% " class="form-control " placeholder="king" name="word" required autofocus type="text" />
+            <div style="width:34%" class="input-group-append">
+                <span  style="width:65%" id=pairResult class="input-group-text">queen</span>
+                <button style="width:35%" class="btn btn-primary" type="button" id=foo onclick="get_wordpair()">Go</button>
+
+             </div>
+        </div>
+      </form>
+      
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p class="mt-5 mb-3 text-muted">Background Image by
+          <a href="https://unsplash.com/@courtmarie?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Courtney Prather">Courtney Prather</a>
+        </P>
+        </div>
+      </footer>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="static/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script>
+    function get_wordpair()
+    {
+
+      document.getElementById("pairResult").textContent="Working";
+      inpWord1 = document.getElementsByName("word")[0].value;
+      inpWord2 = document.getElementsByName("word")[1].value;
+      inpWord3 = document.getElementsByName("word")[2].value;
+      
+      // Use placeholders if there's no input 
+      if (inpWord1 == "")
+         inpWord1 = document.getElementsByName("word")[0].placeholder;
+      
+      if (inpWord2 == "")
+         inpWord2 = document.getElementsByName("word")[1].placeholder;
+
+      if (inpWord3 == "")
+         inpWord3 = document.getElementsByName("word")[2].placeholder;
+
+      // Put still working if there's no response in 5 seconds.
+      /*
+      setTimeout(function () {
+             document.getElementById("pairResult").textContent=".. still working.."
+      }, 5000);
+      */
+
+      console.log('Calling fetch..');
+      fetch('foo')
+        .then(function(response) {
+                console.log('In fetch..');
+           if (!response.ok) {
+              console.log(response)
+              return new Error(response);
+            }
+               console.log('Returning response');
+           return response.text();
+        })
+        .then(function(myText) {
+          document.getElementById("pairResult").textContent=myText;
+      })
+      .catch(function(err) { console.log(err); });
+
+
+
+    }
+    </script>
+  </body>
+</html>
