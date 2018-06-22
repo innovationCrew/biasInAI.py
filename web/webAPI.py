@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template
-from glovevec_analogy import gloveVec
+import sys
+sys.path.append('../')
+from gloveUtils.gloveAnal import gloveVec
 
 app = Flask(__name__)
 
