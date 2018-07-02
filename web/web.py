@@ -5,13 +5,7 @@ sys.path.append('../')
 from gloveUtils.gloveAnal import gloveVec
 
 
-
-
 app = Flask(__name__, static_folder='static')
-
-
-#preload the gloveVector
-gloveVecAnalogy = gloveVec()
 
 
 @app.route('/')
@@ -22,7 +16,7 @@ def hello_world():
 @app.route('/foo')
 def return_foo():
     #return 'Hello World'
-    return Response('fooResult', mimetype='text/plain')
+    return Response('fooResu', mimetype='text/plain')
 
 
 @app.route('/favicon.ico') 
@@ -50,4 +44,6 @@ def result():
 
 
 if __name__ == '__main__':
+	#preload the gloveVector
+	gloveVecAnalogy = gloveVec()
 	app.run(host="0.0.0.0", port=5000, debug=True)	
