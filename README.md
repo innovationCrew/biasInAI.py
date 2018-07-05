@@ -35,3 +35,17 @@ export FLASK_DEBUG=1
 # FOR MAC ONLY --> export LANG=en_US.UTF-8 & export LC_ALL=en_US.UTF-8
 FLASK_APP=webAPI flask run --host=0.0.0.0
 ```
+
+
+## Running uwsgi
+
+uwsgi --http :80 --wsgi-file web.py  --callable app --processes 2 --threads 2
+
+This will spawn 4 processes (each with 2 threads) each.
+
+https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html
+
+## TODO:
+use ngnix : for isolation and load balancing
+optimizie number of threads & processes for optimal performance.
+
