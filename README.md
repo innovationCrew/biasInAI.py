@@ -69,6 +69,7 @@ sudo /home/ubuntu/miniconda3/bin/uwsgi --ini uwsgi.ini # --fallback-config uwsgi
 
 ## On port 8080
 uwsgi --ini uwsgi_safe.ini 
+```
 
 
 
@@ -76,3 +77,14 @@ uwsgi --ini uwsgi_safe.ini
 use ngnix : for isolation and load balancing
 optimizie number of threads & processes for optimal performance.
 
+
+### Running on boot @ Ubuntu
+
+```bash
+# put uwsgi.service in /etc/systemd/system
+sudo mv uwsgi.service /etc/systemd/system
+
+systemctl start uwsgi
+
+# Checking if it's working
+journalctl  -u uwsgi.service
