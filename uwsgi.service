@@ -1,0 +1,9 @@
+[Unit]
+After=sshd.service
+
+[Service]
+WorkingDirectory=/home/ubuntu/biasInAI.py/web/
+ExecStart=/home/ubuntu/miniconda3/bin/uwsgi --ini uwsgi.ini 
+
+[Install]
+WantedBy=default.target
