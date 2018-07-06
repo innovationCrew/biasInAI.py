@@ -16,7 +16,26 @@ This project shows an interactive way of exploring these relationships
 [question retrieval]: https://arxiv.org/abs/1512.05726
 
 
-## Instructions
+## Requirements for minoconda for Linux)
+
+Install Miniconda (or any other python 3 interface)
+
+```bash
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+
+conda config --add channels conda-forge
+conda install --yes --file requirements.txt 
+
+### Alternativly instructions for default Python3
+# sudo apt install python3
+# pip3 install requirements.txt 
+
+```
+
+## Instructions (With Docker)
+
+
 
 ### Build doker container (one time)
 ```bash
@@ -39,11 +58,19 @@ FLASK_APP=webAPI flask run --host=0.0.0.0
 
 ## Running uwsgi
 
-uwsgi --http :80 --wsgi-file web.py  --callable app --processes 2 --threads 2
+```bash
+### MAnnually
+# uwsgi --http :80 --wsgi-file web.py  --callable app --processes 2 --threads 2
+# This will spawn 4 processes (each with 2 threads) each.
+# see https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html
 
-This will spawn 4 processes (each with 2 threads) each.
+# Running on port 80
+sudo /home/ubuntu/miniconda3/bin/uwsgi --ini uwsgi.ini # --fallback-config uwsgi_safe.ini 
 
-https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html
+## On port 8080
+uwsgi --ini uwsgi_safe.ini 
+
+
 
 ## TODO:
 use ngnix : for isolation and load balancing

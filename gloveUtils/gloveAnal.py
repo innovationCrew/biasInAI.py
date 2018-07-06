@@ -171,8 +171,8 @@ def complete_analogy(word_a, word_b, word_c, word_to_vec_map):
 
 class gloveVec:
 
-    #Load the word vectors - Default to 300-dimention GloVe
-    def __init__(self, glove_vec='glove.6B.300d.txt'):
+    #Load the word vectors - Default to 50-dimention GloVe
+    def __init__(self, glove_vec='glove.6B.50d.txt'):
         print('loading ' + glove_vec + '...')
         _, self.word_to_vec_map = read_glove_vecs(glove_vec)
         print('Done Loading')
@@ -186,7 +186,7 @@ if __name__ == '__main__':
 
     triads_to_try = [('italy', 'italian', 'spain'), ('india', 'delhi', 'japan'), ('man', 'woman', 'boy')]
     
-    analogy = gloveVec('glove.6B.50d.txt')
+    analogy = gloveVec('glove.6B.300d.txt')
 
 
     for triad in triads_to_try:
