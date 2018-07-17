@@ -33,21 +33,25 @@ conda install --yes --file requirements.txt
 
 ```
 
-## Instructions (With Docker)
+## Setup Instructions (With Docker)
 
 
 
-### Build doker container (one time)
 ```bash
-cd docker
-docker build -t minicondaapp .
+# Build only Needed Once
+docker build -t biasinai .
+
+#run the docker Container
+docker run --rm -ti -v $PWD:/project -p 5000:5000 -p 80:80 biasinai
+
 ```
 
-### Running the application
+## Running the application
+
+### With Flask (For debugging)
 
 ```bash
 # running the docker container
-docker run --rm -ti -v $PWD:/project -p 5000:5000 minicondaapp
 
 # 
 export FLASK_DEBUG=1
@@ -64,11 +68,17 @@ FLASK_APP=webAPI flask run --host=0.0.0.0
 # This will spawn 4 processes (each with 2 threads) each.
 # see https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html
 
-# Running on port 80
+cd web
+## running when already in root (eg in Dokcer container)
+uwsgi --ini uwsgi.ini
+
+# Running on port 80 as a non root
 sudo /home/ubuntu/miniconda3/bin/uwsgi --ini uwsgi.ini # --fallback-config uwsgi_safe.ini 
 
 ## On port 8080
 uwsgi --ini uwsgi_safe.ini 
+
+
 ```
 
 
@@ -84,7 +94,13 @@ optimizie number of threads & processes for optimal performance.
 # put uwsgi.service in /etc/systemd/system
 sudo mv uwsgi.service /etc/systemd/system
 
-systemctl start uwsgi
+
+#Enable it to run at boot: 
+sudo systemctl enable uwsgi
+
+# Start and stop it mannually
+sudo systemctl start uwsgi
+sudo systemctl stop  uwsgi
 
 # Checking if it's working
 journalctl  -u uwsgi.service
