@@ -151,6 +151,7 @@ def complete_analogy(word_a, word_b, word_c, word_to_vec_map):
     words = word_to_vec_map.keys()
     max_cosine_sim = -100              # Initialize max_cosine_sim to a large negative number
     best_word = None                   # Initialize best_word with None, it will help keep track of the word to output
+    epsilon = 0.001 #Prevent  division by zero
 
     # loop over the whole word vector set
     for w in words:        
@@ -158,8 +159,19 @@ def complete_analogy(word_a, word_b, word_c, word_to_vec_map):
         if w in [word_a, word_b, word_c] :
             continue
         # Compute cosine similarity between the vector (e_b - e_a) and the vector ((w's vector representation) - e_c)  (≈1 line)
-        cosine_sim = cosine_similarity(e_b - e_a, word_to_vec_map[w] - e_c)
         
+        #Pair Direction
+        #cosine_sim = cosine_similarity(e_b - e_a, word_to_vec_map[w] - e_c)
+        
+        #3cosAdd
+        cosine_sim = cosine_similarity(e_c + e_b - e_a, word_to_vec_map[w])
+        
+
+        #3cosMul
+        #cosine_sim = (cosine_similarity(e_c, word_to_vec_map[w]) * cosine_similarity(e_b, word_to_vec_map[w])) / (cosine_similarity(e_a, word_to_vec_map[w]) + epsilon )
+        #cosine_sim = (cosine_similarity(e_c, word_to_vec_map[w]) * cosine_similarity(e_b, word_to_vec_map[w]) )/ (cosine_similarity(e_a, word_to_vec_map[w]) + 0.001)
+
+
         # If the cosine_sim is more than the max_cosine_sim seen so far,
             # then: set the new max_cosine_sim to the current cosine_sim and the best_word to the current word (≈3 lines)
         if cosine_sim > max_cosine_sim:
@@ -186,7 +198,7 @@ if __name__ == '__main__':
 
     triads_to_try = [('italy', 'italian', 'spain'), ('india', 'delhi', 'japan'), ('man', 'woman', 'boy')]
     
-    analogy = gloveVec('glove.6B.300d.txt')
+    analogy = gloveVec('glove.6B.50d.txt')
 
 
     for triad in triads_to_try:
